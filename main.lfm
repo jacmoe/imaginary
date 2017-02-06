@@ -1,0 +1,30 @@
+object MainForm: TMainForm
+  Left = 818
+  Height = 611
+  Top = 255
+  Width = 877
+  Caption = 'MainForm'
+  Menu = MainMenu
+  OnClose = FormClose
+  OnShow = FormShow
+  LCLVersion = '1.6.2.0'
+  object MainMenu: TMainMenu
+    left = 32
+    top = 480
+    object MenuFile: TMenuItem
+      Caption = '&File'
+      object MenuFileExit: TMenuItem
+        Caption = 'E&xit'
+        ShortCut = 16465
+        OnClick = MenuFileExitClick
+      end
+    end
+  end
+  object AppPropertyStore: TIniPropStorage
+    StoredValues = <>
+    IniFileName = 'imaginary.ini'
+    IniSection = 'Application'
+    left = 100
+    top = 486
+  end
+end
