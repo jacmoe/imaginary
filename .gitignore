@@ -1,4 +1,8 @@
 *.o
 *.ppu
+*.lps
+*.lrt
+*.res
 /lib
 /Imaginary
+backup/*
