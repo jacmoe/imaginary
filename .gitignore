@@ -3,7 +3,7 @@
 *.lps
 *.lrt
 *.res
-/lib
+lib/*
 /Imaginary
 backup/*
 *.ini

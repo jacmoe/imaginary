@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs,
-  IniPropStorage, Menus, XMLPropStorage;
+  IniPropStorage, Menus;
 
 type
 
@@ -36,6 +36,9 @@ implementation
 {$R *.lfm}
 
 { TMainForm }
+
+//uses
+//  magick_wand, ImageMagick, IntfGraphics, FPimage, LazUTF8;
 
 procedure TMainForm.StoreFormState;
 begin
