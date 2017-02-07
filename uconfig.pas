@@ -14,21 +14,21 @@ type
     function GetConfig: TImaginaryConfig;
   end;
 
-{ TImaginaryConfig }
+  { TImaginaryConfig }
 
-TImaginaryConfig = class
-private
-  iniOptions: TIniFile;
-  FVersion: string;
-public
-  constructor Create(ini: TIniFile; AVersion: string);
-  destructor Destroy; override;
+  TImaginaryConfig = class
+  private
+    iniOptions: TIniFile;
+    FVersion: string;
+  public
+    constructor Create(ini: TIniFile; AVersion: string);
+    destructor Destroy; override;
 
-  // window
-  function DefaultScreenSize: TRect;
-  function ScreenSizeChanged: boolean;
-  procedure SetDefaultScreenSize(value: TRect);
-end;
+    // window
+    function DefaultScreenSize: TRect;
+    function ScreenSizeChanged: boolean;
+    procedure SetDefaultScreenSize(Value: TRect);
+  end;
 
 function GetActualConfig: TIniFile;
 
@@ -37,7 +37,7 @@ var
 
 implementation
 
-uses forms, uparse, LCLProc, LazFileUtils;
+uses Forms, uparse, LCLProc, LazFileUtils, LazUtf8;
 
 function GetActualConfig: TIniFile;
 var
@@ -46,36 +46,36 @@ var
   PortableConfigFilenameSys: string;
   ActualConfigFilenameSys: string;
   //i: integer;
+begin
+  ActualConfigFilenameSys := '';
+  // check if a config file path is defined
+  AppDirSys := ExtractFilePath(Application.ExeName);
+  PortableConfigFilenameSys := AppDirSys + 'imaginary.ini';
+  if FileExists(PortableConfigFilenameSys) then
   begin
-    ActualConfigFilenameSys := '';
-    // check if a config file path is defined
-    AppDirSys := ExtractFilePath(Application.ExeName);
-    PortableConfigFilenameSys := AppDirSys + 'imaginary.ini';
-    If FileExists(PortableConfigFilenameSys) then
+    PortableConfig := TIniFile.Create(PortableConfigFilenameSys);
+    ActualConfigFilenameSys := PortableConfig.ReadString('General', 'ConfigFile', '');
+    if ActualConfigFilenameSys <> '' then
     begin
-      PortableConfig := TIniFile.Create(PortableConfigFilenameSys);
-      ActualConfigFilenameSys := PortableConfig.ReadString('General', 'ConfigFile', '');
-      if ActualConfigFilenameSys <> '' then
-      begin
-        ActualConfigFilenameSys := ExpandFileName(AppDirSys + ActualConfigFilenameSys);
-      end;
-      PortableConfig.Free;
+      ActualConfigFilenameSys := ExpandFileName(AppDirSys + ActualConfigFilenameSys);
     end;
-    // Otherwise, use default path
-    if ActualConfigFilenameSys = '' then
-    begin
-      CreateDir(GetAppConfigDir(False));
-      ActualConfigFilenameSys := GetAppConfigFile(False, False);
-    end;
-    result := TIniFile.Create(ActualConfigFilenameSys, True);
-    //ActualConfigDirUTF8 := SysToUTF8(ExtractFilePath(ActualConfigFilenameSys));
+    PortableConfig.Free;
   end;
+  // Otherwise, use default path
+  if ActualConfigFilenameSys = '' then
+  begin
+    CreateDir(GetAppConfigDir(False));
+    ActualConfigFilenameSys := GetAppConfigFile(False, False);
+  end;
+  Result := TIniFile.Create(ActualConfigFilenameSys, True);
+  ActualConfigDirUTF8 := SysToUTF8(ExtractFilePath(ActualConfigFilenameSys));
+end;
 
 { TImaginaryConfig }
 
 function TImaginaryConfig.DefaultScreenSize: TRect;
 begin
-  result := StrToRect(iniOptions.ReadString('Window', 'ScreenSize', ''));
+  Result := StrToRect(iniOptions.ReadString('Window', 'ScreenSize', ''));
 end;
 
 function TImaginaryConfig.ScreenSizeChanged: boolean;
@@ -87,17 +87,17 @@ begin
   if not CompareRect(@previousScreenSize, @currentScreenSize.Left) then
   begin
     SetDefaultScreenSize(currentScreenSize);
-    result := true;
+    Result := True;
   end
   else
   begin
-    result := false;
+    Result := False;
   end;
 end;
 
-procedure TImaginaryConfig.SetDefaultScreenSize(value: TRect);
+procedure TImaginaryConfig.SetDefaultScreenSize(Value: TRect);
 begin
-  iniOptions.WriteString('Window', 'ScreenSize', RectToStr(value));
+  iniOptions.WriteString('Window', 'ScreenSize', RectToStr(Value));
 end;
 
 constructor TImaginaryConfig.Create(ini: TIniFile; AVersion: string);

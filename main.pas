@@ -42,45 +42,47 @@ implementation
 
 procedure TMainForm.StoreFormState;
 begin
-  with AppPropertyStore do begin
-       WriteInteger('NormalLeft', Left);
-       WriteInteger('NormalTop', Top);
-       WriteInteger('NormalWidth', Width);
-       WriteInteger('NormalHeight', Height);
+  with AppPropertyStore do
+  begin
+    WriteInteger('NormalLeft', Left);
+    WriteInteger('NormalTop', Top);
+    WriteInteger('NormalWidth', Width);
+    WriteInteger('NormalHeight', Height);
 
-       WriteInteger('RestoredLeft', RestoredLeft);
-       WriteInteger('RestoredTop', RestoredTop);
-       WriteInteger('RestoredWidth', RestoredWidth);
-       WriteInteger('RestoredHeight', RestoredHeight);
+    WriteInteger('RestoredLeft', RestoredLeft);
+    WriteInteger('RestoredTop', RestoredTop);
+    WriteInteger('RestoredWidth', RestoredWidth);
+    WriteInteger('RestoredHeight', RestoredHeight);
 
-       WriteInteger('WindowState', Integer(WindowState));
-     end;
+    WriteInteger('WindowState', integer(WindowState));
+  end;
 end;
 
 procedure TMainForm.RestoreFormState;
 var
   LastWindowState: TWindowState;
 begin
-  with AppPropertyStore do begin
-       LastWindowState := TWindowState(ReadInteger('WindowState', Integer(WindowState)));
+  with AppPropertyStore do
+  begin
+    LastWindowState := TWindowState(ReadInteger('WindowState', integer(WindowState)));
 
-       if LastWindowState = wsMaximized then begin
-         WindowState := wsNormal;
-         BoundsRect := Bounds(
-           ReadInteger('RestoredLeft', RestoredLeft),
-           ReadInteger('RestoredTop', RestoredTop),
-           ReadInteger('RestoredWidth', RestoredWidth),
-           ReadInteger('RestoredHeight', RestoredHeight));
-         WindowState := wsMaximized;
-       end else begin
-         WindowState := wsNormal;
-         BoundsRect := Bounds(
-           ReadInteger('NormalLeft', Left),
-           ReadInteger('NormalTop', Top),
-           ReadInteger('NormalWidth', Width),
-           ReadInteger('NormalHeight', Height));
-       end;
-     end;
+    if LastWindowState = wsMaximized then
+    begin
+      WindowState := wsNormal;
+      BoundsRect := Bounds(ReadInteger('RestoredLeft', RestoredLeft),
+        ReadInteger('RestoredTop', RestoredTop),
+        ReadInteger('RestoredWidth', RestoredWidth),
+        ReadInteger('RestoredHeight', RestoredHeight));
+      WindowState := wsMaximized;
+    end
+    else
+    begin
+      WindowState := wsNormal;
+      BoundsRect := Bounds(ReadInteger('NormalLeft', Left),
+        ReadInteger('NormalTop', Top), ReadInteger('NormalWidth', Width),
+        ReadInteger('NormalHeight', Height));
+    end;
+  end;
 end;
 
 procedure TMainForm.MenuFileExitClick(Sender: TObject);
@@ -99,4 +101,3 @@ begin
 end;
 
 end.
-
