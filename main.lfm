@@ -1,13 +1,16 @@
 object MainForm: TMainForm
-  Left = 818
+  Left = 525
   Height = 611
-  Top = 255
+  Top = 187
   Width = 877
-  Caption = 'MainForm'
+  Caption = 'Imaginary'
+  ClientHeight = 611
+  ClientWidth = 877
   Menu = MainMenu
   OnClose = FormClose
   OnShow = FormShow
-  LCLVersion = '1.6.2.0'
+  LCLVersion = '1.6.3.0'
+  Visible = False
   object MainMenu: TMainMenu
     left = 32
     top = 480

@@ -7,12 +7,16 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, main, uconfig
+  Forms, main, Inifiles, ImaginaryConfig, ImaginaryTypes, ImaginaryInstance
   { you can add units after this };
 
 {$R *.res}
 
+var
+  ActualConfig: TIniFile;
+
 begin
+  ActualConfig := GetActualConfig;
   RequireDerivedFormResource:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);

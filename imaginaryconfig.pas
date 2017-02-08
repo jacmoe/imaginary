@@ -1,4 +1,4 @@
-unit UConfig;
+unit ImaginaryConfig;
 
 {$mode objfpc}{$H+}
 
@@ -28,6 +28,10 @@ type
     function DefaultScreenSize: TRect;
     function ScreenSizeChanged: boolean;
     procedure SetDefaultScreenSize(Value: TRect);
+    function DefaultMainWindowMaximized: boolean;
+    procedure SetDefaultMainWindowMaximized(value: boolean);
+    function DefaultMainWindowPosition: TRect;
+    procedure SetDefaultMainWindowPosition(value: TRect);
   end;
 
 function GetActualConfig: TIniFile;
@@ -98,6 +102,27 @@ end;
 procedure TImaginaryConfig.SetDefaultScreenSize(Value: TRect);
 begin
   iniOptions.WriteString('Window', 'ScreenSize', RectToStr(Value));
+end;
+
+function TImaginaryConfig.DefaultMainWindowMaximized: boolean;
+begin
+  result := iniOptions.ReadBool('Window','MainWindowMaximized',false);
+end;
+
+procedure TImaginaryConfig.SetDefaultMainWindowMaximized(value: boolean);
+begin
+  iniOptions.WriteBool('Window','MainWindowMaximized',value);
+end;
+
+function TImaginaryConfig.DefaultMainWindowPosition: TRect;
+begin
+  result := StrToRect(iniOptions.ReadString('Window','MainWindowPosition',''));
+end;
+
+procedure TImaginaryConfig.SetDefaultMainWindowPosition(value: TRect);
+begin
+  iniOptions.WriteString('Window','MainWindowPosition',RectToStr(value));
+  SetDefaultMainWindowMaximized(False);
 end;
 
 constructor TImaginaryConfig.Create(ini: TIniFile; AVersion: string);

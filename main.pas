@@ -39,20 +39,20 @@ implementation
 
 //uses
 //  magick_wand, ImageMagick, IntfGraphics, FPimage, LazUTF8;
+uses
+  uparse;
 
 procedure TMainForm.StoreFormState;
+var
+  currentScreensize, restoredScreensize: TRect;
 begin
   with AppPropertyStore do
   begin
-    WriteInteger('NormalLeft', Left);
-    WriteInteger('NormalTop', Top);
-    WriteInteger('NormalWidth', Width);
-    WriteInteger('NormalHeight', Height);
+    currentScreensize := Rect(Left, Top, Left + Width, Top + Height);
+    WriteString('ScreenSize', RectToStr(currentScreensize));
 
-    WriteInteger('RestoredLeft', RestoredLeft);
-    WriteInteger('RestoredTop', RestoredTop);
-    WriteInteger('RestoredWidth', RestoredWidth);
-    WriteInteger('RestoredHeight', RestoredHeight);
+    restoredScreensize := Rect(RestoredLeft, RestoredTop, RestoredLeft + RestoredWidth, RestoredTop + RestoredHeight);
+    WriteString('RestoredScreenSize', RectToStr(restoredScreensize));
 
     WriteInteger('WindowState', integer(WindowState));
   end;
@@ -61,6 +61,7 @@ end;
 procedure TMainForm.RestoreFormState;
 var
   LastWindowState: TWindowState;
+  rect : TRect;
 begin
   with AppPropertyStore do
   begin
@@ -69,18 +70,15 @@ begin
     if LastWindowState = wsMaximized then
     begin
       WindowState := wsNormal;
-      BoundsRect := Bounds(ReadInteger('RestoredLeft', RestoredLeft),
-        ReadInteger('RestoredTop', RestoredTop),
-        ReadInteger('RestoredWidth', RestoredWidth),
-        ReadInteger('RestoredHeight', RestoredHeight));
+      rect := StrToRect(ReadString('ScreenSize', ''));
+      //BoundsRect := Bounds();
       WindowState := wsMaximized;
     end
     else
     begin
       WindowState := wsNormal;
-      BoundsRect := Bounds(ReadInteger('NormalLeft', Left),
-        ReadInteger('NormalTop', Top), ReadInteger('NormalWidth', Width),
-        ReadInteger('NormalHeight', Height));
+      rect := StrToRect(ReadString('RestoredScreenSize', ''));
+      //BoundsRect := Bounds();
     end;
   end;
 end;
