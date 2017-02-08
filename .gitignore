@@ -6,4 +6,6 @@
 lib/*
 /Imaginary
 backup/*
+units/backup/*
+forms/backup/*
 *.ini
