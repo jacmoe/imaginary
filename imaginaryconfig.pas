@@ -54,7 +54,7 @@ begin
   ActualConfigFilenameSys := '';
   // check if a config file path is defined
   AppDirSys := ExtractFilePath(Application.ExeName);
-  PortableConfigFilenameSys := AppDirSys + 'imaginary.ini';
+  PortableConfigFilenameSys := AppDirSys + 'Imaginary.cfg';
   if FileExists(PortableConfigFilenameSys) then
   begin
     PortableConfig := TIniFile.Create(PortableConfigFilenameSys);
@@ -69,7 +69,7 @@ begin
   if ActualConfigFilenameSys = '' then
   begin
     CreateDir(GetAppConfigDir(False));
-    ActualConfigFilenameSys := GetAppConfigFile(False, False);
+    ActualConfigFilenameSys := GetAppConfigFile(False, True);
   end;
   Result := TIniFile.Create(ActualConfigFilenameSys, True);
   ActualConfigDirUTF8 := SysToUTF8(ExtractFilePath(ActualConfigFilenameSys));

@@ -68,7 +68,8 @@ end;
 
 procedure TMainForm.FormShow(Sender: TObject);
 begin
-  if Position = poDefault then ImaginaryInstance.RestoreMainWindowPosition;
+  //if Position = poDefault then
+  ImaginaryInstance.RestoreMainWindowPosition;
 end;
 
 procedure TMainForm.FormHide(Sender: TObject);
