@@ -41,7 +41,7 @@ var
 
 implementation
 
-uses Forms, uparse, LCLProc, LazFileUtils, LazUtf8;
+uses Forms, ImaginaryUtils, LCLProc, LazFileUtils, LazUtf8;
 
 function GetActualConfig: TIniFile;
 var
