@@ -1,11 +1,12 @@
-unit main;
+unit ImaginaryForm;
 
 {$mode objfpc}{$H+}
 
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ImaginaryConfig, ImaginaryTypes,
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs,
+  ImaginaryConfig, ImaginaryTypes,
   Menus;
 
 type
@@ -22,14 +23,15 @@ type
     procedure MenuFileExitClick(Sender: TObject);
   private
     { private declarations }
-    Config : TImaginaryConfig;
+    Config: TImaginaryConfig;
     FImaginaryInstance: TImaginaryCustomInstance;
     initialized: boolean;
     procedure SetImaginaryInstance(const AValue: TImaginaryCustomInstance);
     procedure Init;
   public
     { public declarations }
-    property ImaginaryInstance: TImaginaryCustomInstance read FImaginaryInstance write SetImaginaryInstance;
+    property ImaginaryInstance: TImaginaryCustomInstance
+      read FImaginaryInstance write SetImaginaryInstance;
   end;
 
 var
@@ -52,10 +54,10 @@ end;
 
 procedure TMainForm.Init;
 begin
-  initialized := false;
+  initialized := False;
   Config := ImaginaryInstance.Config;
 
-  initialized := true;
+  initialized := True;
 
   //UpdateWindowCaption;
 end;

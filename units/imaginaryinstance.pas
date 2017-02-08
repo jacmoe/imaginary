@@ -5,7 +5,7 @@ unit ImaginaryInstance;
 interface
 
 uses
-  Classes, SysUtils, Controls, ImaginaryTypes, IniFiles, ImaginaryConfig, main;
+  Classes, SysUtils, Controls, ImaginaryTypes, IniFiles, ImaginaryConfig, ImaginaryForm;
 
 type
   TImaginaryInstance = class(TImaginaryCustomInstance)
@@ -58,12 +58,12 @@ end;
 procedure TImaginaryInstance.UseConfig(ini: TInifile);
 begin
   FreeAndNil(FConfig);
-  FConfig := TImaginaryConfig.Create(ini,ImaginaryCurrentVersionOnly);
+  FConfig := TImaginaryConfig.Create(ini, ImaginaryCurrentVersionOnly);
 end;
 
 function TImaginaryInstance.GetConfig: TImaginaryConfig;
 begin
-  result := FConfig;
+  Result := FConfig;
 end;
 
 procedure TImaginaryInstance.Show;
@@ -75,12 +75,14 @@ end;
 
 procedure TImaginaryInstance.Hide;
 begin
-  if MainFormVisible then MainForm.Hide;
+  if MainFormVisible then
+    MainForm.Hide;
 end;
 
 procedure TImaginaryInstance.Run;
 begin
-  if not MainFormVisible then Show;
+  if not MainFormVisible then
+    Show;
   repeat
     application.ProcessMessages;
     Sleep(10);
@@ -89,67 +91,77 @@ end;
 
 procedure TImaginaryInstance.FormsNeeded;
 begin
-  if (MainForm <> nil) or FInFormsNeeded then exit;
+  if (MainForm <> nil) or FInFormsNeeded then
+    exit;
 
-  FInFormsNeeded := true;
+  FInFormsNeeded := True;
   Application.CreateForm(TMainForm, MainForm);
   MainForm.ImaginaryInstance := self;
 
-  FInFormsNeeded := false;
+  FInFormsNeeded := False;
 end;
 
 function TImaginaryInstance.GetMainFormVisible: boolean;
 begin
   if MainForm <> nil then
-    result := MainForm.Visible
+    Result := MainForm.Visible
   else
-    result := false;
+    Result := False;
 end;
 
 function TImaginaryInstance.GetFullscreen: boolean;
 begin
-  result := FFullscreen;
+  Result := FFullscreen;
 end;
 
 procedure TImaginaryInstance.SetFullscreen(AValue: boolean);
 begin
-  if (AValue = FFullscreen) or not MainFormVisible or (MainForm.WindowState = wsMinimized) then exit;
+  if (AValue = FFullscreen) or not MainFormVisible or
+    (MainForm.WindowState = wsMinimized) then
+    exit;
   FFullscreen := AValue;
   if AValue then
   begin
     SaveMainWindowPosition;
-    MainForm.BorderStyle:= bsNone;
-    MainForm.WindowState:= wsFullScreen;
-  end else
+    MainForm.BorderStyle := bsNone;
+    MainForm.WindowState := wsFullScreen;
+  end
+  else
   begin
     MainForm.BorderStyle := bsSizeable;
-    MainForm.WindowState:= wsNormal;
+    MainForm.WindowState := wsNormal;
     RestoreMainWindowPosition;
   end;
 end;
 
 procedure TImaginaryInstance.SaveMainWindowPosition;
-var r:TRect;
+var
+  r: TRect;
 begin
-  if MainForm.WindowState = wsMinimized then exit;
+  if MainForm.WindowState = wsMinimized then
+    exit;
   if MainForm.WindowState = wsMaximized then
-    Config.SetDefaultMainWindowMaximized(true) else
-  If MainForm.WindowState = wsNormal then
-    begin
-      r.left := MainForm.Left;
-      r.top := MainForm.Top;
-      r.right := r.left+MainForm.ClientWidth;
-      r.Bottom := r.top+MainForm.ClientHeight;
-      Config.SetDefaultMainWindowPosition(r);
-    end;
+    Config.SetDefaultMainWindowMaximized(True)
+  else
+  if MainForm.WindowState = wsNormal then
+  begin
+    r.left := MainForm.Left;
+    r.top := MainForm.Top;
+    r.right := r.left + MainForm.ClientWidth;
+    r.Bottom := r.top + MainForm.ClientHeight;
+    Config.SetDefaultMainWindowPosition(r);
+  end;
 end;
 
 procedure TImaginaryInstance.RestoreMainWindowPosition;
-var r:TRect;
+var
+  r: TRect;
 begin
-  if not MainFormVisible then exit;
+  if not MainFormVisible then
+    exit;
   if Config.DefaultMainWindowMaximized then
-    MainForm.WindowState := wsMaximized else
+    MainForm.WindowState := wsMaximized
+  else
   begin
     r := Config.DefaultMainWindowPosition;
     if (r.right > r.left) and (r.bottom > r.top) then
@@ -157,11 +169,10 @@ begin
       MainForm.Position := poDesigned;
       MainForm.Left := r.Left;
       MainForm.Top := r.Top;
-      MainForm.ClientWidth := r.right-r.left;
-      MainForm.ClientHeight := r.bottom-r.top
+      MainForm.ClientWidth := r.right - r.left;
+      MainForm.ClientHeight := r.bottom - r.top;
     end;
   end;
 end;
 
 end.
-

@@ -7,14 +7,13 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, main, Inifiles, ImaginaryConfig, ImaginaryTypes, ImaginaryInstance
-  { you can add units after this };
+  Forms, ImaginaryForm, Inifiles, ImaginaryConfig, ImaginaryTypes, ImaginaryInstance;
 
 {$R *.res}
 
 type
 
-  { TMyLazPaintInstance }
+  { TMyImaginaryInstance }
 
   TMyImaginaryInstance = class(TImaginaryInstance);
 

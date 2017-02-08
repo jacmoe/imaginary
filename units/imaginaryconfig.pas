@@ -29,9 +29,9 @@ type
     function ScreenSizeChanged: boolean;
     procedure SetDefaultScreenSize(Value: TRect);
     function DefaultMainWindowMaximized: boolean;
-    procedure SetDefaultMainWindowMaximized(value: boolean);
+    procedure SetDefaultMainWindowMaximized(Value: boolean);
     function DefaultMainWindowPosition: TRect;
-    procedure SetDefaultMainWindowPosition(value: TRect);
+    procedure SetDefaultMainWindowPosition(Value: TRect);
   end;
 
 function GetActualConfig: TIniFile;
@@ -106,22 +106,22 @@ end;
 
 function TImaginaryConfig.DefaultMainWindowMaximized: boolean;
 begin
-  result := iniOptions.ReadBool('Window','MainWindowMaximized',false);
+  Result := iniOptions.ReadBool('Window', 'MainWindowMaximized', False);
 end;
 
-procedure TImaginaryConfig.SetDefaultMainWindowMaximized(value: boolean);
+procedure TImaginaryConfig.SetDefaultMainWindowMaximized(Value: boolean);
 begin
-  iniOptions.WriteBool('Window','MainWindowMaximized',value);
+  iniOptions.WriteBool('Window', 'MainWindowMaximized', Value);
 end;
 
 function TImaginaryConfig.DefaultMainWindowPosition: TRect;
 begin
-  result := StrToRect(iniOptions.ReadString('Window','MainWindowPosition',''));
+  Result := StrToRect(iniOptions.ReadString('Window', 'MainWindowPosition', ''));
 end;
 
-procedure TImaginaryConfig.SetDefaultMainWindowPosition(value: TRect);
+procedure TImaginaryConfig.SetDefaultMainWindowPosition(Value: TRect);
 begin
-  iniOptions.WriteString('Window','MainWindowPosition',RectToStr(value));
+  iniOptions.WriteString('Window', 'MainWindowPosition', RectToStr(Value));
   SetDefaultMainWindowMaximized(False);
 end;
 
@@ -137,4 +137,3 @@ begin
 end;
 
 end.
-

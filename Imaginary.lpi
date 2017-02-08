@@ -42,6 +42,7 @@
       <Unit1>
         <Filename Value="units/imaginaryconfig.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="ImaginaryConfig"/>
       </Unit1>
       <Unit2>
         <Filename Value="units/imaginarytypes.pas"/>
@@ -50,13 +51,15 @@
       <Unit3>
         <Filename Value="units/imaginaryinstance.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="ImaginaryInstance"/>
       </Unit3>
       <Unit4>
-        <Filename Value="forms/main.pas"/>
+        <Filename Value="forms/imaginaryform.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="MainForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <UnitName Value="ImaginaryForm"/>
       </Unit4>
       <Unit5>
         <Filename Value="units/imaginaryutils.pas"/>
@@ -72,7 +75,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="units"/>
+      <OtherUnitFiles Value="units;forms"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
