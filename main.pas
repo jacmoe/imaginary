@@ -5,27 +5,31 @@ unit main;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs,
-  IniPropStorage, Menus;
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ImaginaryConfig, ImaginaryTypes,
+  Menus;
 
 type
 
   { TMainForm }
 
   TMainForm = class(TForm)
-    AppPropertyStore: TIniPropStorage;
     MainMenu: TMainMenu;
     MenuFile: TMenuItem;
     MenuFileExit: TMenuItem;
-    procedure StoreformState;
-    procedure RestoreFormState;
-    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
+    procedure FormHide(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure MenuFileExitClick(Sender: TObject);
   private
     { private declarations }
+    Config : TImaginaryConfig;
+    FImaginaryInstance: TImaginaryCustomInstance;
+    initialized: boolean;
+    procedure SetImaginaryInstance(const AValue: TImaginaryCustomInstance);
+    procedure Init;
   public
     { public declarations }
+    property ImaginaryInstance: TImaginaryCustomInstance read FImaginaryInstance write SetImaginaryInstance;
   end;
 
 var
@@ -36,66 +40,45 @@ implementation
 {$R *.lfm}
 
 { TMainForm }
-
-//uses
-//  magick_wand, ImageMagick, IntfGraphics, FPimage, LazUTF8;
-uses
-  uparse;
-
-procedure TMainForm.StoreFormState;
-var
-  currentScreensize, restoredScreensize: TRect;
+procedure TMainForm.SetImaginaryInstance(const AValue: TImaginaryCustomInstance);
 begin
-  with AppPropertyStore do
+  if (FImaginaryInstance = nil) and (AValue <> nil) then
   begin
-    currentScreensize := Rect(Left, Top, Left + Width, Top + Height);
-    WriteString('ScreenSize', RectToStr(currentScreensize));
-
-    restoredScreensize := Rect(RestoredLeft, RestoredTop, RestoredLeft + RestoredWidth, RestoredTop + RestoredHeight);
-    WriteString('RestoredScreenSize', RectToStr(restoredScreensize));
-
-    WriteInteger('WindowState', integer(WindowState));
+    FImaginaryInstance := AValue;
+    //FLayout.FImaginaryInstance := AValue;
+    Init;
   end;
 end;
 
-procedure TMainForm.RestoreFormState;
-var
-  LastWindowState: TWindowState;
-  rect : TRect;
+procedure TMainForm.Init;
 begin
-  with AppPropertyStore do
-  begin
-    LastWindowState := TWindowState(ReadInteger('WindowState', integer(WindowState)));
+  initialized := false;
+  Config := ImaginaryInstance.Config;
 
-    if LastWindowState = wsMaximized then
-    begin
-      WindowState := wsNormal;
-      rect := StrToRect(ReadString('ScreenSize', ''));
-      //BoundsRect := Bounds();
-      WindowState := wsMaximized;
-    end
-    else
-    begin
-      WindowState := wsNormal;
-      rect := StrToRect(ReadString('RestoredScreenSize', ''));
-      //BoundsRect := Bounds();
-    end;
-  end;
+  initialized := true;
+
+  //UpdateWindowCaption;
 end;
+
 
 procedure TMainForm.MenuFileExitClick(Sender: TObject);
 begin
   Close;
 end;
 
-procedure TMainForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
-begin
-  StoreFormState;
-end;
-
 procedure TMainForm.FormShow(Sender: TObject);
 begin
-  RestoreFormState;
+  if Position = poDefault then ImaginaryInstance.RestoreMainWindowPosition;
+end;
+
+procedure TMainForm.FormHide(Sender: TObject);
+begin
+  ImaginaryInstance.SaveMainWindowPosition;
+end;
+
+procedure TMainForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+begin
+  ImaginaryInstance.SaveMainWindowPosition;
 end;
 
 end.

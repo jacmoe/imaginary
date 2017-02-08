@@ -12,14 +12,33 @@ uses
 
 {$R *.res}
 
+type
+
+  { TMyLazPaintInstance }
+
+  TMyImaginaryInstance = class(TImaginaryInstance);
+
 var
   ActualConfig: TIniFile;
+  ImaginaryApplication: TMyImaginaryInstance;
 
 begin
   ActualConfig := GetActualConfig;
   RequireDerivedFormResource:=True;
   Application.Initialize;
-  Application.CreateForm(TMainForm, MainForm);
-  Application.Run;
+
+  ImaginaryApplication := TMyImaginaryInstance.Create;
+  ImaginaryApplication.UseConfig(ActualConfig);
+
+  begin
+    ImaginaryApplication.Show;
+    Application.Run;
+  end;
+
+  ImaginaryApplication.Hide;
+  Application.ProcessMessages;
+
+  ImaginaryApplication.Free;
+
 end.
 

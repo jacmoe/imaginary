@@ -5,7 +5,7 @@ unit ImaginaryTypes;
 interface
 
 uses
-  Classes, SysUtils, Dialogs, Controls, ImaginaryConfig;
+  Classes, SysUtils, Dialogs, Controls, IniFiles, ImaginaryConfig;
 
 const
   ImaginaryCurrentVersionOnly = '0.1.0';
@@ -28,6 +28,20 @@ type
     function _Release: Integer; {$IF (not defined(WINDOWS)) AND (FPC_FULLVERSION>=20501)}cdecl{$ELSE}stdcall{$IFEND};
 
     function GetConfig: TImaginaryConfig; virtual; abstract;
+
+    function GetFullscreen: boolean; virtual; abstract;
+    procedure SetFullscreen(AValue: boolean); virtual; abstract;
+  public
+    Title, AboutText: string;
+    constructor Create; virtual; abstract;
+    constructor Create(AEmbedded: boolean); virtual; abstract;
+    procedure Show; virtual; abstract;
+    procedure Hide; virtual; abstract;
+    procedure Run; virtual; abstract;
+    procedure SaveMainWindowPosition; virtual; abstract;
+    procedure RestoreMainWindowPosition; virtual; abstract;
+    procedure UseConfig(ini: TInifile); virtual; abstract;
+    property Config: TImaginaryConfig read GetConfig;
   end;
 
 implementation

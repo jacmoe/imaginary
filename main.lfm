@@ -7,7 +7,8 @@ object MainForm: TMainForm
   ClientHeight = 611
   ClientWidth = 877
   Menu = MainMenu
-  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnHide = FormHide
   OnShow = FormShow
   LCLVersion = '1.6.3.0'
   Visible = False
@@ -22,12 +23,5 @@ object MainForm: TMainForm
         OnClick = MenuFileExitClick
       end
     end
-  end
-  object AppPropertyStore: TIniPropStorage
-    StoredValues = <>
-    IniFileName = 'imaginary.ini'
-    IniSection = 'Application'
-    left = 100
-    top = 486
   end
 end
