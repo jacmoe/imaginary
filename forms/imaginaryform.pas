@@ -5,7 +5,7 @@ unit ImaginaryForm;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs,
+  Classes, SysUtils, eventlog, FileUtil, Forms, Controls, Graphics, Dialogs,
   ImaginaryConfig, ImaginaryTypes,
   Menus;
 
@@ -14,6 +14,7 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    ImaginaryLog: TEventLog;
     MainMenu: TMainMenu;
     MenuFile: TMenuItem;
     MenuFileExit: TMenuItem;
@@ -47,7 +48,6 @@ begin
   if (FImaginaryInstance = nil) and (AValue <> nil) then
   begin
     FImaginaryInstance := AValue;
-    //FLayout.FImaginaryInstance := AValue;
     Init;
   end;
 end;
@@ -58,6 +58,8 @@ begin
   Config := ImaginaryInstance.Config;
 
   initialized := True;
+
+  ImaginaryLog.Log('Initialization complete.');
 
   //UpdateWindowCaption;
 end;
@@ -70,7 +72,6 @@ end;
 
 procedure TMainForm.FormShow(Sender: TObject);
 begin
-  //if Position = poDefault then
   ImaginaryInstance.RestoreMainWindowPosition;
 end;
 

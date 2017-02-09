@@ -9,3 +9,5 @@ backup/*
 units/backup/*
 forms/backup/*
 *.ini
+*.dbg
+*.log

@@ -24,4 +24,17 @@ object MainForm: TMainForm
       end
     end
   end
+  object ImaginaryLog: TEventLog
+    AppendContent = True
+    LogType = ltFile
+    Active = False
+    RaiseExceptionOnError = False
+    DefaultEventType = etCustom
+    FileName = 'imaginary.log'
+    CustomLogType = 0
+    EventIDOffset = 0
+    Paused = False
+    left = 113
+    top = 493
+  end
 end
