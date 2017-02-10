@@ -1,20 +1,17 @@
 object MainForm: TMainForm
-  Left = 525
-  Height = 611
-  Top = 187
-  Width = 877
+  Left = 341
+  Height = 408
+  Top = 160
+  Width = 656
   Caption = 'Imaginary'
-  ClientHeight = 611
-  ClientWidth = 877
   Menu = MainMenu
   OnCloseQuery = FormCloseQuery
   OnHide = FormHide
   OnShow = FormShow
   LCLVersion = '1.6.3.0'
-  Visible = False
   object MainMenu: TMainMenu
-    left = 32
-    top = 480
+    left = 48
+    top = 312
     object MenuFile: TMenuItem
       Caption = '&File'
       object MenuFileExit: TMenuItem
@@ -34,7 +31,7 @@ object MainForm: TMainForm
     CustomLogType = 0
     EventIDOffset = 0
     Paused = False
-    left = 113
-    top = 493
+    left = 152
+    top = 312
   end
 end

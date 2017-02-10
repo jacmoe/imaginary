@@ -44,6 +44,8 @@
               <StackChecks Value="True"/>
             </Checks>
             <VerifyObjMethodCallValidity Value="True"/>
+            <TargetCPU Value="x86_64"/>
+            <TargetOS Value="linux"/>
           </CodeGeneration>
           <Linking>
             <Debugging>
@@ -58,6 +60,12 @@
               </Win32>
             </Options>
           </Linking>
+          <Other>
+            <Verbosity>
+              <ShowAll Value="True"/>
+              <ShowDebugInfo Value="True"/>
+            </Verbosity>
+          </Other>
         </CompilerOptions>
       </Item2>
       <Item3 Name="Release">

@@ -7,7 +7,8 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, ImaginaryForm, Inifiles, ImaginaryConfig, ImaginaryTypes, ImaginaryInstance;
+  Forms, ImaginaryForm, Inifiles, ImaginaryConfig, ImaginaryTypes,
+  ImaginaryInstance, ImageMagick;
 
 {$R *.res}
 
