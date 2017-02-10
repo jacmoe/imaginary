@@ -90,10 +90,10 @@ begin
   end;
 end;
 
-//initialization
-//  MagickWandGenesis;
+initialization
+  MagickWandGenesis;
 
-//finalization;
-//  MagickWandTerminus;
+finalization;
+  MagickWandTerminus;
 
 end.

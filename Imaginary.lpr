@@ -8,7 +8,7 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, ImaginaryForm, Inifiles, ImaginaryConfig, ImaginaryTypes,
-  ImaginaryInstance, ImageMagick;
+  ImaginaryInstance, ImaginaryMagick;
 
 {$R *.res}
 

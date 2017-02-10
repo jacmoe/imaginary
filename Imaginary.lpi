@@ -115,7 +115,7 @@
         <PackageName Value="LCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="6">
+    <Units Count="7">
       <Unit0>
         <Filename Value="Imaginary.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -147,6 +147,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="ImaginaryUtils"/>
       </Unit5>
+      <Unit6>
+        <Filename Value="units/imaginarymagick.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ImaginaryMagick"/>
+      </Unit6>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
