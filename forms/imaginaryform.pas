@@ -7,17 +7,19 @@ interface
 uses
   Classes, SysUtils, eventlog, FileUtil, Forms, Controls, Graphics, Dialogs,
   ImaginaryConfig, ImaginaryTypes,
-  Menus;
+  Menus, ActnList, StdActns;
 
 type
 
   { TMainForm }
 
   TMainForm = class(TForm)
+    FileExit1: TFileExit;
+    ImaginaryActionList: TActionList;
     ImaginaryLog: TEventLog;
     MainMenu: TMainMenu;
     MenuFile: TMenuItem;
-    MenuFileExit: TMenuItem;
+    MenuItem1: TMenuItem;
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormHide(Sender: TObject);
     procedure FormShow(Sender: TObject);

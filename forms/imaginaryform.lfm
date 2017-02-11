@@ -14,10 +14,8 @@ object MainForm: TMainForm
     top = 312
     object MenuFile: TMenuItem
       Caption = '&File'
-      object MenuFileExit: TMenuItem
-        Caption = 'E&xit'
-        ShortCut = 16465
-        OnClick = MenuFileExitClick
+      object MenuItem1: TMenuItem
+        Action = FileExit1
       end
     end
   end
@@ -31,7 +29,16 @@ object MainForm: TMainForm
     CustomLogType = 0
     EventIDOffset = 0
     Paused = False
-    left = 152
+    left = 312
     top = 312
+  end
+  object ImaginaryActionList: TActionList
+    left = 176
+    top = 312
+    object FileExit1: TFileExit
+      Category = 'File'
+      Caption = 'E&xit'
+      Hint = 'Exit'
+    end
   end
 end
