@@ -14,12 +14,16 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    ActionAddDir: TAction;
     FileExit1: TFileExit;
+    ImaginaryImageList: TImageList;
     ImaginaryActionList: TActionList;
     ImaginaryLog: TEventLog;
     MainMenu: TMainMenu;
     MenuFile: TMenuItem;
+    MenuFileExit: TMenuItem;
     MenuItem1: TMenuItem;
+    procedure ActionAddDirExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormHide(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -85,6 +89,11 @@ end;
 procedure TMainForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
   ImaginaryInstance.SaveMainWindowPosition;
+end;
+
+procedure TMainForm.ActionAddDirExecute(Sender: TObject);
+begin
+  //
 end;
 
 end.
