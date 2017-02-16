@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, eventlog, FileUtil, Forms, Controls, Graphics, Dialogs,
   ImaginaryConfig, ImaginaryTypes,
-  Menus, ActnList, StdActns;
+  Menus, ActnList, StdActns, ComCtrls, BCToolBar;
 
 type
 
@@ -15,7 +15,9 @@ type
 
   TMainForm = class(TForm)
     ActionAddDir: TAction;
+    BCToolBar1: TBCToolBar;
     FileExit1: TFileExit;
+    ImaginaryImageListLarge: TImageList;
     ImaginaryImageList: TImageList;
     ImaginaryActionList: TActionList;
     ImaginaryLog: TEventLog;
@@ -23,6 +25,10 @@ type
     MenuFile: TMenuItem;
     MenuFileExit: TMenuItem;
     MenuItem1: TMenuItem;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
+    ToolButton4: TToolButton;
     procedure ActionAddDirExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormHide(Sender: TObject);
